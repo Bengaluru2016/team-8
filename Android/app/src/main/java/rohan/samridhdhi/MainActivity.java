@@ -17,4 +17,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this,SurveyActivity.class);
         startActivity(intent);
     }
+
+    public void enroll(View view) {
+        Intent intent = new Intent(MainActivity.this,EnrollmentActivity.class);
+        startActivity(intent);
+    }
 }

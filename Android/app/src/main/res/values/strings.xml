@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Samridhdhi</string>
+    <string name="title_activity_enrollment">EnrollmentActivity</string>
 
 </resources>

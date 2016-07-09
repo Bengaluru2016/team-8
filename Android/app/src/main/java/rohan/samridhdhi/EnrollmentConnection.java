@@ -1,8 +1,14 @@
 package rohan.samridhdhi;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,18 +21,42 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by Rohan on 7/9/2016.
  */
-public class SurveyConnection extends AsyncTask<Void,Void,Void> {
-
+public class EnrollmentConnection extends AsyncTask<Void,Void,Void> {
     String urlString;
     String Response = "";
+    Context context;
+    ArrayList<String> listArray = new ArrayList<>();
+    public static ArrayList<String> id = new ArrayList<>();
 
-    SurveyConnection(String url)
-    {
+    EnrollmentConnection(String url, Context enrollmentActivity){
         this.urlString = url;
+        context = enrollmentActivity;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+
+        try {
+            JSONArray jsonArray = new JSONArray(Response);
+            for (int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                listArray.add(jsonObject.getString("name"));
+                id.add(jsonObject.getString("id"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                android.R.layout.simple_list_item_1, listArray);
+        EnrollmentActivity.listView.setAdapter(adapter);
+
+        super.onPostExecute(aVoid);
     }
 
     @Override
@@ -39,35 +69,6 @@ public class SurveyConnection extends AsyncTask<Void,Void,Void> {
             httpURLConnection.setDoInput(true);
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setRequestMethod("POST");
-
-            Uri.Builder builder = new Uri.Builder()
-                    .appendQueryParameter("name", Constants.name)
-                    .appendQueryParameter("age", Constants.age)
-                    .appendQueryParameter("gender", Constants.gender)
-                    .appendQueryParameter("phone", Constants.phone)
-                    .appendQueryParameter("sibling_age", Constants.sibling_age)
-                    .appendQueryParameter("sibling_name", Constants.sibling_name)
-                    .appendQueryParameter("parents_name", Constants.parent_name)
-                    .appendQueryParameter("parents_income", Constants.parent_income)
-                    .appendQueryParameter("parents_occupation", Constants.parent_occupation)
-                    .appendQueryParameter("language", Constants.language)
-                    .appendQueryParameter("bridge", Constants.bridge)
-                    .appendQueryParameter("location", Constants.location)
-                    .appendQueryParameter("survey", Constants.survey)
-                    .appendQueryParameter("relocated", Constants.relocation);
-
-
-            String query = builder.build().getEncodedQuery();
-
-            Log.d("test", query);
-
-            OutputStream os = httpURLConnection.getOutputStream();
-
-            BufferedWriter mBufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-            mBufferedWriter.write(query);
-            mBufferedWriter.flush();
-            mBufferedWriter.close();
-            os.close();
 
             httpURLConnection.connect();
             BufferedReader mBufferedInputStream = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
@@ -87,7 +88,8 @@ public class SurveyConnection extends AsyncTask<Void,Void,Void> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Response = "";
+//        Response = "";
+
 
         return null;
     }

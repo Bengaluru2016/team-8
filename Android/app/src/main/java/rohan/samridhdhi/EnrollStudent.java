@@ -17,23 +17,24 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 /**
- * Created by Rohan on 7/9/2016.
+ * Created by Rohan on 7/10/2016.
  */
-public class SurveyConnection extends AsyncTask<Void,Void,Void> {
+public class EnrollStudent extends AsyncTask<Void, Void, Void> {
 
-    String urlString;
     String Response = "";
+    String URLString;
+    String id;
 
-    SurveyConnection(String url)
-    {
-        this.urlString = url;
+    EnrollStudent(String url, String id) {
+        URLString = url;
+        this.id = id;
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
         URL url;
         try {
-            url = new URL(urlString);
+            url = new URL(URLString);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
             httpURLConnection.setDoInput(true);
@@ -41,20 +42,7 @@ public class SurveyConnection extends AsyncTask<Void,Void,Void> {
             httpURLConnection.setRequestMethod("POST");
 
             Uri.Builder builder = new Uri.Builder()
-                    .appendQueryParameter("name", Constants.name)
-                    .appendQueryParameter("age", Constants.age)
-                    .appendQueryParameter("gender", Constants.gender)
-                    .appendQueryParameter("phone", Constants.phone)
-                    .appendQueryParameter("sibling_age", Constants.sibling_age)
-                    .appendQueryParameter("sibling_name", Constants.sibling_name)
-                    .appendQueryParameter("parents_name", Constants.parent_name)
-                    .appendQueryParameter("parents_income", Constants.parent_income)
-                    .appendQueryParameter("parents_occupation", Constants.parent_occupation)
-                    .appendQueryParameter("language", Constants.language)
-                    .appendQueryParameter("bridge", Constants.bridge)
-                    .appendQueryParameter("location", Constants.location)
-                    .appendQueryParameter("survey", Constants.survey)
-                    .appendQueryParameter("relocated", Constants.relocation);
+                    .appendQueryParameter("id", id);
 
 
             String query = builder.build().getEncodedQuery();
@@ -88,7 +76,6 @@ public class SurveyConnection extends AsyncTask<Void,Void,Void> {
             e.printStackTrace();
         }
         Response = "";
-
         return null;
     }
 }
