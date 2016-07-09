@@ -29,7 +29,7 @@ include_once 'dbconnect.php';
 				<li><p class="navbar-text">Signed in as <?php echo $_SESSION['usr_name']; ?></p></li>
 				<li><a href="logout.php">Log Out</a></li>
 				<?php } else { ?>
-				<li><a href="pmlogin.php">Login</a></li>
+				<li><a href="pmlogin1.php">Login</a></li>
 				<li><a href="adlogin.php">Admin</a></li>
 				
 				
@@ -50,7 +50,7 @@ include_once 'dbconnect.php';
     // output data of each row
 			while($row = $result->fetch_assoc()) {
 				
-			echo "<a href='test.php/?schoolname=".$row["schoolname"]."'>" . $row["schoolname"]. "<br>";
+			echo "<a href='http://localhost/CFG/test1.php/?schoolname=".$row["Location"]."'>" . $row["Location"]. "<br>";
 			}
 			} else {
 			echo "0 results";

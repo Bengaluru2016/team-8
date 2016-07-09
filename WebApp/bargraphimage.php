@@ -2,7 +2,7 @@
 include('phpgraphlib.php');
 include_once 'dbconnect.php';
 $graph = new PHPGraphLib(500,350);
-$school="vijaywada";
+$school=$_GET["schoolname"];
 $sql="SELECT count(*) as counts FROM student where Location='" . $school."' AND Been_to_school=1" ;
 $sql1="SELECT count(*) as counts1 FROM student where Location='" . $school."' AND Been_to_school=0" ;
 $result = $con->query($sql) or die('Query failed: ' . mysql_error());
