@@ -3,11 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:orientation="horizontal"
-   android:background="@color/white"
+    android:background="@color/white"
+    android:orientation="horizontal"
     tools:context="rohan.samridhdhi.SplashActivity">
 
-    <ImageView   android:id="@+id/logo" android:src="@drawable/logo1" android:layout_gravity="center" android:layout_height="match_parent" android:layout_width="wrap_content" >
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/logo1">
 
     </ImageView>
 </LinearLayout>
