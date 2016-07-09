@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 
 /**
  * Created by Rohan on 7/9/2016.
@@ -13,10 +15,13 @@ import android.view.ViewGroup;
 public class FragmentFirst extends Fragment {
 
     View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first,container,false);
+        CommonFunctions.first_init(view);
         return view;
     }
+
 }

@@ -16,7 +16,8 @@ public class FragmentSecond extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_first,container,false);
+        view = inflater.inflate(R.layout.fragment_second,container,false);
+        CommonFunctions.second_init(view);
         return view;
     }
 }

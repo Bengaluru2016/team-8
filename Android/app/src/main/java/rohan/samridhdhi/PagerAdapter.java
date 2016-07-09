@@ -20,6 +20,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
+    public CharSequence getPageTitle(int position) {
+        return "Survey Stage "+(position+1);
+    }
+
+    @Override
     public int getCount() {
         return SurveyActivity.fragmentArrayList.size();
     }

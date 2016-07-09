@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/Parent_name"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:hint="Enter the parent's name(Father or Mother)"/>
 
     <EditText
