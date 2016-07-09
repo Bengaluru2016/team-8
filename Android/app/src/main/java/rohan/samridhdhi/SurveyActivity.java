@@ -17,18 +17,22 @@ public class SurveyActivity extends AppCompatActivity {
 
     ViewPager mPager;
     public static ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
+    boolean  enroll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
 
+        Intent intent = getIntent();
+        enroll  = intent.getBooleanExtra("enroll",false);
+
         init();
     }
 
     private void init() {
         // initialize the fab
-        //  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+          FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
         // initialize the pager
@@ -51,7 +55,8 @@ public class SurveyActivity extends AppCompatActivity {
                 int position = mPager.getCurrentItem();
                 // last item
                 if (position == (fragmentArrayList.size()-1)){
-                    Toast.makeText(SurveyActivity.this, "Send the data to db", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(SurveyActivity.this, "Send the data to db", Toast.LENGTH_SHORT).show();
+                    CommonFunctions.getData(enroll);
                 }
                 else {
                     mPager.setCurrentItem((mPager.getCurrentItem()+1));

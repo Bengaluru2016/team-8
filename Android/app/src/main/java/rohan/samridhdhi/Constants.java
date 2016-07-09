@@ -14,11 +14,14 @@ public class Constants {
     public static String parent_income;
     public static String language;
     public static String bridge;
-    public static String sibling_name;
-    public static String sibling_age;
+    public static String sibling_name="No";
+    public static String sibling_age="No";
     public static String location;
     public static String relocation;
 
-    public static String surveyUrl = "http://";
+    public static String surveyUrl = "http://52.77.224.71/getStudentData.php";
 
+    public static String enrollUrl = "http://52.77.224.71/getStudents.php";
+    public static String enrollAddUrl = "";
+    public static String enrollWithIdUrl = "";
 }

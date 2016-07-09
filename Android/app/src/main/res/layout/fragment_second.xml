@@ -57,5 +57,12 @@
             android:text="YES" />
     </RadioGroup>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nativeLocation"
+        android:hint="Enter the native location"
+        />
+
 
 </LinearLayout>

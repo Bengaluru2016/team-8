@@ -41,8 +41,19 @@ public class SurveyConnection extends AsyncTask<Void,Void,Void> {
             httpURLConnection.setRequestMethod("POST");
 
             Uri.Builder builder = new Uri.Builder()
-//                    .appendQueryParameter("array", "" + jsonArray)
-                    .appendQueryParameter("salesman_id", "");
+                    .appendQueryParameter("name", Constants.name)
+                    .appendQueryParameter("age", Constants.age)
+                    .appendQueryParameter("gender", Constants.gender)
+                    .appendQueryParameter("phone", Constants.phone)
+                    .appendQueryParameter("sibling_age", Constants.sibling_age)
+                    .appendQueryParameter("sibling_name", Constants.sibling_name)
+                    .appendQueryParameter("parents_name", Constants.parent_name)
+                    .appendQueryParameter("parents_income", Constants.parent_income)
+                    .appendQueryParameter("parents_occupation", Constants.parent_occupation)
+                    .appendQueryParameter("language", Constants.language)
+                    .appendQueryParameter("bridge", Constants.bridge)
+                    .appendQueryParameter("location", Constants.location)
+                    .appendQueryParameter("relocated", Constants.relocation);
 
 
             String query = builder.build().getEncodedQuery();
