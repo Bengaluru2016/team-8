@@ -5,41 +5,43 @@
     <LinearLayout   android:orientation="horizontal"
         android:layout_weight="1"
         android:gravity="center"
+
         android:layout_width="match_parent" android:layout_height="wrap_content">
     <Button
         android:text="Survey"
-        android:layout_margin="35dp"
-        android:background="@drawable/mybutton"
+
+        android:background="@drawable/desert"
         android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <Button
         android:text="Enrollment"
+        android:background="@drawable/desert"
 
-        android:background="@drawable/mybutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="35dp"/>
+        />
 
 
     </LinearLayout>
     <LinearLayout   android:orientation="horizontal"
         android:layout_weight="1"
+
         android:gravity="center"
         android:layout_width="match_parent" android:layout_height="wrap_content">
         <Button
            android:text="Relocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="35dp"
-            android:background="@drawable/mybutton"
+
+            android:background="@drawable/desert"
             android:layout_gravity="top"/>
         <Button
             android:text="Attendance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="35dp"
-            android:background="@drawable/mybutton"
+
+            android:background="@drawable/desert"
             android:layout_gravity="top"/>
 
 
