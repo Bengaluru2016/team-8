@@ -22,4 +22,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this,EnrollmentActivity.class);
         startActivity(intent);
     }
+
+    public void relocate(View view) {
+        Intent intent = new Intent(MainActivity.this,RelocateActivity.class);
+        startActivity(intent)
+        ;
+    }
 }

@@ -22,7 +22,9 @@
         <activity
             android:name=".EnrollmentActivity"
             android:label="@string/title_activity_enrollment"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RelocateActivity" />
+        <activity android:name=".AttendanceActivity"></activity>
     </application>
 
 </manifest>

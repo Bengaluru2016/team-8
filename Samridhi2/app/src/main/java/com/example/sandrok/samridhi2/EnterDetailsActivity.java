@@ -1,5 +1,8 @@
 package com.example.sandrok.samridhi2;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,29 +15,67 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class EnterDetailsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static ListView listView;
+    int _bridge = 0;
+    public static ArrayList<String> presentIds = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate
+                (savedInstanceState);
         setContentView(R.layout.activity_enter_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Intent intent = getIntent();
+        _bridge = intent.getIntExtra("Bridge",0);
+
+        listView = (ListView) findViewById(R.id.list);
+
+
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(EnterDetailsActivity.this);
+        final EditText input = new EditText(EnterDetailsActivity.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        alertDialog.setView(input);
+        alertDialog.setTitle("Enter the location!");
+        alertDialog.setPositiveButton("PROCEED", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(DialogInterface dialog, int which) {
+                new GetStudents(input.getText().toString(),_bridge,EnterDetailsActivity.this).execute();
+            }
+        });
+        alertDialog.setNegativeButton("CANCEL", null);
+        alertDialog.show();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                presentIds.add(GetStudents.id.get(i));
+                new UpdateAttendance("http://52.77.224.71/UpdateAttendance.php",GetStudents.id.get(i));
+                Toast.makeText(EnterDetailsActivity.this, GetStudents.listArray.get(i)+" was marked present", Toast.LENGTH_SHORT).show();
+
             }
         });
 
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
