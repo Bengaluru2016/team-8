@@ -15,7 +15,7 @@ $data = array();
           }
 		  }
 $graph->addData($data);
-$graph->setTitle('Widgets Produced');
+$graph->setTitle('Students Progress Marks');
 $graph->setGradient('red', 'maroon');
 $graph->createGraph();		  
 

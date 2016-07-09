@@ -11,7 +11,7 @@ $row = mysqli_fetch_assoc($result) ;
 $row1 = mysqli_fetch_assoc($result1);
 $data=array("Bridge"=>$row["counts"],"Main"=>$row1["counts1"]);
 $graph->addData($data);
-$graph->setTitle('Widgets Produced');
+$graph->setTitle('Bridge vs Main Stream');
 $graph->setGradient('red', 'maroon');
 $graph->createGraph();
 ?>
