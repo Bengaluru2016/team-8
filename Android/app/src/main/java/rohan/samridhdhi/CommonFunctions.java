@@ -19,6 +19,20 @@ public class CommonFunctions {
         age = (EditText) view.findViewById(R.id.age);
         phone = (EditText) view.findViewById(R.id.phone);
         gender = (RadioGroup) view.findViewById(R.id.gender);
+        gender.setOnCheckedChangeListener( new RadioGroup.OnCheckedChangeListener(){
+          public void onCheckedChanged(RadioGroup gr,int id)
+          {
+              switch(id)
+              {
+                  case R.id.male:
+                       Constants.gender="male";
+                       break;
+                  case R.id.female:
+                      Constants.gender="female";
+                       break;
+              }
+          }
+        });
     }
 
     public static void second_init(View view) {
@@ -27,6 +41,20 @@ public class CommonFunctions {
         parent_income = (EditText) view.findViewById(R.id.Parent_income);
         location = (EditText) view.findViewById(R.id.location);
         relocate= (RadioGroup) view.findViewById(R.id.relocate);
+        relocate.setOnCheckedChangeListener( new RadioGroup.OnCheckedChangeListener(){
+            public void onCheckedChanged(RadioGroup gr,int id)
+            {
+                switch(id)
+                {
+                    case R.id.relocate_yes:
+                        Constants.relocation="yes";
+                         break;
+                    case R.id.relocate_no:
+                        Constants.relocation="no";
+                         break;
+                }
+            }
+        });
     }
 
     public static void third_init(View view) {
@@ -36,17 +64,57 @@ public class CommonFunctions {
         sibling_name.setVisibility(View.INVISIBLE);
         sibling_age.setVisibility(View.INVISIBLE);
         bridge = (RadioGroup) view.findViewById(R.id.bridge);
+        bridge.setOnCheckedChangeListener( new RadioGroup.OnCheckedChangeListener(){
+            public void onCheckedChanged(RadioGroup gr,int id)
+            {
+                switch(id)
+                {
+                    case R.id.bridge_yes:
+                        Constants.bridge="mainstream";
+                        break;
+                    case R.id.bridge_no:
+                        Constants.bridge="bridge";
+                        break;
+                }
+            }
+        });
         sibling = (RadioGroup) view.findViewById(R.id.sibling);
+        sibling.setOnCheckedChangeListener( new RadioGroup.OnCheckedChangeListener(){
+            public void onCheckedChanged(RadioGroup gr,int id)
+            {
+                switch(id)
+                {
+                    case R.id.sibling_yes:
+          //              Constants.sibling="yes";
+                          break;
+                    case R.id.sibling_no:
+                        Constants.bridge="no";
+                         break;
+                }
+            }
+        });
+
     }
 
 
     public static void fourth_init(View view) {
         imageView = (ImageView) view.findViewById(R.id.imageView);
+
     }
 
     public static void getData(){
         // getting the data from edit texts
         Constants.name = name.getText().toString();
+        Constants.age = age.getText().toString();
+        Constants.phone = phone.getText().toString();
+        Constants.parent_name = parent_name.getText().toString();
+        Constants.parent_occupation = parent_occupation.getText().toString();
+        Constants.parent_income = parent_income.getText().toString();
+        Constants.location = location.getText().toString();
+        Constants.language= language.getText().toString();
+        Constants.sibling_name = sibling_name.getText().toString();
+        Constants.sibling_age = sibling_age.getText().toString();
+
 
     }
 }
