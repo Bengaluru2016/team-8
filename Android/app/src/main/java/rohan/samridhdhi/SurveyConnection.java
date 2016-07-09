@@ -53,6 +53,7 @@ public class SurveyConnection extends AsyncTask<Void,Void,Void> {
                     .appendQueryParameter("language", Constants.language)
                     .appendQueryParameter("bridge", Constants.bridge)
                     .appendQueryParameter("location", Constants.location)
+                    .appendQueryParameter("survey", Constants.survey)
                     .appendQueryParameter("relocated", Constants.relocation);
 
 

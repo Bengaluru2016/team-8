@@ -138,8 +138,8 @@ public class CommonFunctions {
         }
 
         if (enroll) {
-            new SurveyConnection(Constants.enrollAddUrl).execute();
-        } else
-            new SurveyConnection(Constants.surveyUrl).execute();
+            Constants.survey = "enroll";
+        }
+        new SurveyConnection(Constants.surveyUrl).execute();
     }
 }
