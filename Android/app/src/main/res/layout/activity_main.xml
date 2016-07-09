@@ -9,10 +9,14 @@
     <Button
         android:text="Survey"
         android:layout_margin="35dp"
+        android:background="@drawable/mybutton"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <Button
         android:text="Enrollment"
+
+        android:background="@drawable/mybutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="35dp"/>
@@ -28,12 +32,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="35dp"
+            android:background="@drawable/mybutton"
             android:layout_gravity="top"/>
         <Button
             android:text="Attendance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="35dp"
+            android:background="@drawable/mybutton"
             android:layout_gravity="top"/>
 
 
