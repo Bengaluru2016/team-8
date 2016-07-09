@@ -1,11 +1,14 @@
 package rohan.samridhdhi;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ public class SurveyActivity extends AppCompatActivity {
 
     private void init() {
         // initialize the fab
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
         // initialize the pager
@@ -41,6 +44,7 @@ public class SurveyActivity extends AppCompatActivity {
         mPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
 
         // fab onClick to move
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,6 +59,18 @@ public class SurveyActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            FragmentFourth ff = (FragmentFourth) fragmentArrayList.get(3);
+            ImageView i = (ImageView) ff.view.findViewById(R.id.imageView);
+            i.setImageBitmap(imageBitmap);
+        }
 
     }
 }

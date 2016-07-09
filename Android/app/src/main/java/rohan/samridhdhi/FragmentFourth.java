@@ -19,7 +19,7 @@ public class FragmentFourth extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fourth, container, false);
-        CommonFunctions.fourth_init(view);
+        CommonFunctions.fourth_init(view,getActivity());
         return view;
     }
 

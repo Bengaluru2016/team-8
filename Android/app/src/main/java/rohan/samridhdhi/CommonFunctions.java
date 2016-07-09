@@ -1,5 +1,9 @@
 package rohan.samridhdhi;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -97,9 +101,20 @@ public class CommonFunctions {
     }
 
 
-    public static void fourth_init(View view) {
+    public static void fourth_init(View view,Activity c) {
         imageView = (ImageView) view.findViewById(R.id.imageView);
+        final Activity t=c;
+        imageView.setOnClickListener(new ImageView.OnClickListener()
 
+        {
+           public void onClick(View v)
+           {
+               Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+               if (takePictureIntent.resolveActivity(t.getPackageManager()) != null) {
+                   t.startActivityForResult(takePictureIntent,1);
+               }
+           }
+        });
     }
 
     public static void getData(){
