@@ -43,4 +43,10 @@ public class CommonFunctions {
     public static void fourth_init(View view) {
         imageView = (ImageView) view.findViewById(R.id.imageView);
     }
+
+    public static void getData(){
+        // getting the data from edit texts
+        Constants.name = name.getText().toString();
+
+    }
 }
