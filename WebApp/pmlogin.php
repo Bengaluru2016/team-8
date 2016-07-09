@@ -13,8 +13,11 @@ if (isset($_POST['login'])) {
 	$email = mysqli_real_escape_string($con, $_POST['email']);
 	$password = mysqli_real_escape_string($con, $_POST['password']);
 	$result = mysqli_query($con, "SELECT * FROM users WHERE email = '" . $email. "' and password = '" . md5($password) . "'");
+	
+	
 
 	if ($row = mysqli_fetch_array($result)) {
+		echo $row['email'];
 		$_SESSION['usr_id'] = $row['id'];
 		$_SESSION['usr_name'] = $row['name'];
 		header("Location: index.php");
@@ -49,7 +52,7 @@ if (isset($_POST['login'])) {
 		<div class="collapse navbar-collapse" id="navbar1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="active"><a href="login.php">Login</a></li>
-			
+				<li><a href="register.php">Sign Up</a></li>
 			</ul>
 		</div>
 	</div>
