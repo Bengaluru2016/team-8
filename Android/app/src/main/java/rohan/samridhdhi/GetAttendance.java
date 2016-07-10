@@ -1,8 +1,14 @@
 package rohan.samridhdhi;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,26 +21,52 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by Rohan on 7/10/2016.
  */
-public class RelocatedStudent extends AsyncTask<Void,Void,Void>{
+public class GetAttendance extends AsyncTask<Void,Void,Void>{
 
+    String urlString;
     String Response = "";
-    String id;
-    String URLString;
+    Context context;
+    String location;
 
-    public RelocatedStudent(String addRelocationUrl, String id) {
-        this.id = id;
-        URLString = addRelocationUrl;
+    public GetAttendance(String s, Context attendanceActivity,String url) {
+        location = s;
+        context = attendanceActivity;
+        urlString = url;
+    }
+
+    ArrayList<String> listArray = new ArrayList<>();
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        try {
+            JSONArray jsonArray = new JSONArray(Response);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                listArray.add(jsonObject.getString("name")+" "+jsonObject.getString("present"));
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                android.R.layout.simple_list_item_1, listArray);
+        AttendanceActivity.listView.setAdapter(adapter);
+
+
+        super.onPostExecute(aVoid);
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
         URL url;
         try {
-            url = new URL(URLString);
+            url = new URL(urlString);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
             httpURLConnection.setDoInput(true);
@@ -42,7 +74,7 @@ public class RelocatedStudent extends AsyncTask<Void,Void,Void>{
             httpURLConnection.setRequestMethod("POST");
 
             Uri.Builder builder = new Uri.Builder()
-                    .appendQueryParameter("id", id);
+                    .appendQueryParameter("location", location);
 
 
             String query = builder.build().getEncodedQuery();
@@ -75,9 +107,7 @@ public class RelocatedStudent extends AsyncTask<Void,Void,Void>{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Response = "";
+
         return null;
     }
-
-
 }

@@ -41,9 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-
             android:background="@drawable/desert"
-            android:text="Relocation" />
+            android:text="Relocation"
+            android:onClick="relocate" />
 
         <Button
             android:layout_width="wrap_content"

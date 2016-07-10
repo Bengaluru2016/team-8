@@ -1,4 +1,4 @@
-package rohan.samridhdhi;
+package com.example.sandrok.samridhi2;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -19,22 +19,22 @@ import java.net.URL;
 /**
  * Created by Rohan on 7/10/2016.
  */
-public class RelocatedStudent extends AsyncTask<Void,Void,Void>{
+public class UpdateAttendance extends AsyncTask<Void,Void,Void>{
 
+    String urlString;
     String Response = "";
     String id;
-    String URLString;
 
-    public RelocatedStudent(String addRelocationUrl, String id) {
+    public UpdateAttendance(String url,String id){
+        urlString = url;
         this.id = id;
-        URLString = addRelocationUrl;
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
         URL url;
         try {
-            url = new URL(URLString);
+            url = new URL(urlString);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
             httpURLConnection.setDoInput(true);
@@ -76,8 +76,7 @@ public class RelocatedStudent extends AsyncTask<Void,Void,Void>{
             e.printStackTrace();
         }
         Response = "";
+
         return null;
     }
-
-
 }

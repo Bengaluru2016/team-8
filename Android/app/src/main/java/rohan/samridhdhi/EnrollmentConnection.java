@@ -1,7 +1,6 @@
 package rohan.samridhdhi;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -11,11 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -26,14 +22,14 @@ import java.util.ArrayList;
 /**
  * Created by Rohan on 7/9/2016.
  */
-public class EnrollmentConnection extends AsyncTask<Void,Void,Void> {
+public class EnrollmentConnection extends AsyncTask<Void, Void, Void> {
     String urlString;
     String Response = "";
     Context context;
     ArrayList<String> listArray = new ArrayList<>();
     public static ArrayList<String> id = new ArrayList<>();
 
-    EnrollmentConnection(String url, Context enrollmentActivity){
+    EnrollmentConnection(String url, Context enrollmentActivity) {
         this.urlString = url;
         context = enrollmentActivity;
     }
@@ -43,7 +39,7 @@ public class EnrollmentConnection extends AsyncTask<Void,Void,Void> {
 
         try {
             JSONArray jsonArray = new JSONArray(Response);
-            for (int i=0;i<jsonArray.length();i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 listArray.add(jsonObject.getString("name"));
                 id.add(jsonObject.getString("id"));

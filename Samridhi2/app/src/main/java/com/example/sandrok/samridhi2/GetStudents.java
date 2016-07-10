@@ -1,8 +1,14 @@
-package rohan.samridhdhi;
+package com.example.sandrok.samridhi2;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,47 +21,59 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by Rohan on 7/10/2016.
  */
-public class RelocatedStudent extends AsyncTask<Void,Void,Void>{
+public class GetStudents extends AsyncTask<Void,Void,Void> {
 
+    String location;
+    int _bridge;
+    String urlSelect[] = {"http://52.77.224.71/AttendanceMainstream.php","http://52.77.224.71/AttendanceList.php"};
     String Response = "";
-    String id;
-    String URLString;
+    Context context;
+    public static ArrayList<String> listArray = new ArrayList<>();
+    public static ArrayList<String> id = new ArrayList<>();
 
-    public RelocatedStudent(String addRelocationUrl, String id) {
-        this.id = id;
-        URLString = addRelocationUrl;
+    public GetStudents(String string, int _bridge,Context context) {
+        location = string;
+        this._bridge = _bridge;
+        this.context = context;
     }
 
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+
+        try {
+            JSONArray jsonArray = new JSONArray(Response);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                listArray.add(jsonObject.getString("name"));
+                id.add(jsonObject.getString("id"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                android.R.layout.simple_list_item_1, listArray);
+        EnterDetailsActivity.listView.setAdapter(adapter);
+
+        super.onPostExecute(aVoid);
+    }
     @Override
     protected Void doInBackground(Void... voids) {
         URL url;
         try {
-            url = new URL(URLString);
+            url = new URL(urlSelect[_bridge]);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
             httpURLConnection.setDoInput(true);
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setRequestMethod("POST");
 
-            Uri.Builder builder = new Uri.Builder()
-                    .appendQueryParameter("id", id);
-
-
-            String query = builder.build().getEncodedQuery();
-
-            Log.d("test", query);
-
-            OutputStream os = httpURLConnection.getOutputStream();
-
-            BufferedWriter mBufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-            mBufferedWriter.write(query);
-            mBufferedWriter.flush();
-            mBufferedWriter.close();
-            os.close();
 
             httpURLConnection.connect();
             BufferedReader mBufferedInputStream = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
@@ -75,9 +93,6 @@ public class RelocatedStudent extends AsyncTask<Void,Void,Void>{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Response = "";
         return null;
     }
-
-
 }

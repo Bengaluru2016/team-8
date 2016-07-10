@@ -20,8 +20,11 @@ public class Constants {
     public static String relocation;
     public static String survey = "survey";
 
-    public static String surveyUrl = "http://52.77.224.71/addStudentData.php";
+    private static String BaseUrl = "http://52.77.224.71";
 
-    public static String enrollUrl = "http://52.77.224.71/getStudents.php";
-    public static String enrollWithIdUrl = "http://52.77.224.71/";
+    public static String surveyUrl = BaseUrl+"/addStudentData.php";
+    public static String enrollUrl = BaseUrl+"/getStudents.php";
+    public static String enrollWithIdUrl = BaseUrl+"/EnrollStudent.php";
+    public static String getRelocationUrl = BaseUrl+"/GetRelocation.php";
+    public static String addRelocationUrl = BaseUrl+"/AddRelocation.php";
 }
