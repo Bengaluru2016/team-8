@@ -28,4 +28,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent)
         ;
     }
+    public void attendance(View view) {
+        Intent intent = new Intent(MainActivity.this,AttendanceActivity.class);
+        startActivity(intent)
+        ;
+    }
 }

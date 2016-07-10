@@ -26,17 +26,17 @@ import java.util.ArrayList;
 /**
  * Created by Rohan on 7/10/2016.
  */
-public class GetStudents extends AsyncTask<Void,Void,Void> {
+public class GetStudents extends AsyncTask<Void, Void, Void> {
 
     String location;
     int _bridge;
-    String urlSelect[] = {"http://52.77.224.71/AttendanceMainstream.php","http://52.77.224.71/AttendanceList.php"};
+    String urlSelect[] = {"http://52.77.224.71/AttendanceMainstream.php", "http://52.77.224.71/AttendanceList.php"};
     String Response = "";
     Context context;
     public static ArrayList<String> listArray = new ArrayList<>();
     public static ArrayList<String> id = new ArrayList<>();
 
-    public GetStudents(String string, int _bridge,Context context) {
+    public GetStudents(String string, int _bridge, Context context) {
         location = string;
         this._bridge = _bridge;
         this.context = context;
@@ -63,6 +63,7 @@ public class GetStudents extends AsyncTask<Void,Void,Void> {
 
         super.onPostExecute(aVoid);
     }
+
     @Override
     protected Void doInBackground(Void... voids) {
         URL url;
@@ -74,6 +75,21 @@ public class GetStudents extends AsyncTask<Void,Void,Void> {
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setRequestMethod("POST");
 
+            Uri.Builder builder = new Uri.Builder()
+                    .appendQueryParameter("location", location);
+
+
+            String query = builder.build().getEncodedQuery();
+
+            Log.d("test", query);
+
+            OutputStream os = httpURLConnection.getOutputStream();
+
+            BufferedWriter mBufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            mBufferedWriter.write(query);
+            mBufferedWriter.flush();
+            mBufferedWriter.close();
+            os.close();
 
             httpURLConnection.connect();
             BufferedReader mBufferedInputStream = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));

@@ -54,6 +54,9 @@ public class GetAttendance extends AsyncTask<Void,Void,Void>{
             e.printStackTrace();
         }
 
+        if (Response.equals("[]")){
+            listArray.add("Rohan 5");
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                 android.R.layout.simple_list_item_1, listArray);
         AttendanceActivity.listView.setAdapter(adapter);

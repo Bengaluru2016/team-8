@@ -50,7 +50,7 @@ public class RelocateConnection extends AsyncTask<Void, Void, Void> {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                 android.R.layout.simple_list_item_1, listArray);
-        EnrollmentActivity.listView.setAdapter(adapter);
+        RelocateActivity.listView.setAdapter(adapter);
 
         super.onPostExecute(aVoid);
     }

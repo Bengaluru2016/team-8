@@ -3,6 +3,7 @@ package com.example.sandrok.samridhi2;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -65,7 +66,7 @@ public class EnterDetailsActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 presentIds.add(GetStudents.id.get(i));
-                new UpdateAttendance("http://52.77.224.71/UpdateAttendance.php",GetStudents.id.get(i));
+                new UpdateAttendance("http://52.77.224.71/UpdateAttendance.php",GetStudents.id.get(i)).execute();
                 Toast.makeText(EnterDetailsActivity.this, GetStudents.listArray.get(i)+" was marked present", Toast.LENGTH_SHORT).show();
 
             }
@@ -124,16 +125,26 @@ public class EnterDetailsActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            Intent intent = new Intent(EnterDetailsActivity.this,MarksActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            Intent intent = new Intent(EnterDetailsActivity.this,HealthActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.nav_share){
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "9880290275"));
+            startActivity(intent);
+        }
+        else if (id == R.id.nav_send){
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Join your hands to give a wonderful future to the deserved ones. Invest in the future of India!! Spread the word about Samridhdhi Trust.");
+            sendIntent.setType("text/plain");
+            startActivity(Intent.createChooser(sendIntent, "Samridhdhi trust"));
 
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
