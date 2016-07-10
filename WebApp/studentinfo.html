@@ -1,0 +1,15 @@
+<?php
+include_once 'dbconnect.php';
+$school=$_GET["schoolname"];
+$sql="SELECT * as counts FROM student where Location='" . $school."'" ;
+
+$result = $con->query($sql) or die('Query failed: ' . mysql_error());
+$result1 = $con->query($sql1) or die('Query failed: ' . mysql_error());
+$row = mysqli_fetch_assoc($result) ;
+$row1 = mysqli_fetch_assoc($result1);
+$data=array("Bridge"=>$row["counts"],"Main"=>$row1["counts1"]);
+$graph->addData($data);
+$graph->setTitle('Bridge vs Main Stream');
+$graph->setGradient('red', 'maroon');
+$graph->createGraph();
+?>
